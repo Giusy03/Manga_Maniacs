@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.Collection;
 import java.util.LinkedList;
 
-import Bean.UserBean;
+import bean.userBean;
 
 import model.DriverManagerConnectionPool;
 
@@ -45,10 +45,10 @@ public class userDAO {
 		
 	
 	
-	public UserBean signIn(String username, String password) throws SQLException {
+	public userBean signIn(String username, String password) throws SQLException {
 		Connection connessione = null;
 		PreparedStatement statement = null;
-		UserBean utente;
+		userBean utente;
 		String query = "SELECT * FROM "+TABLE_NAME+" WHERE username = '" + username + "' && psw = '" + password +"'";
 		try {
 			connessione = DriverManagerConnectionPool.getConnection();
@@ -59,7 +59,7 @@ public class userDAO {
 
 			if(rs.next()) {
 		
-				utente = new UserBean();
+				utente = new userBean();
 				utente.setId(rs.getInt("id"));
 				utente.setUsername(rs.getString("username"));
 				
@@ -89,7 +89,7 @@ public class userDAO {
 		}
 	}
 	
-	public UserBean signUp(String username, String password) throws SQLException {
+	public userBean signUp(String username, String password) throws SQLException {
 		
 			Connection connessione = null;
 			PreparedStatement statement = null;
@@ -129,11 +129,11 @@ public class userDAO {
 		
 		return null;
 	}
-	public synchronized Collection<UserBean> RetrieveAll()  throws SQLException {
+	public synchronized Collection<userBean> RetrieveAll()  throws SQLException {
 
 		Connection connessione = null;
 		PreparedStatement statement = null;
-		Collection<UserBean> beans = new LinkedList<UserBean>();
+		Collection<userBean> beans = new LinkedList<userBean>();
 		
 		
 		String selectSQL  = "SELECT * FROM "+TABLE_NAME ;
@@ -150,7 +150,7 @@ public class userDAO {
 		
 			ResultSet rs = statement.executeQuery(selectSQL);
 			while (rs.next()) {
-				UserBean utente = new UserBean();
+				userBean utente = new userBean();
 			
 utente.setUsername(rs.getString("username"));
 				
@@ -181,7 +181,7 @@ utente.setUsername(rs.getString("username"));
 		return beans;
 	}
 	
-	public synchronized boolean modifyUtenteDati(UserBean user)  throws SQLException {
+	public synchronized boolean modifyUtenteDati(userBean user)  throws SQLException {
 		
 		Connection connessione = null;
 		PreparedStatement statement = null;
@@ -218,7 +218,7 @@ utente.setUsername(rs.getString("username"));
 	}
 		return (result != 0);
 	}
-public synchronized boolean modifyUtentePsw(UserBean user,String psw)  throws SQLException {
+public synchronized boolean modifyUtentePsw(userBean user,String psw)  throws SQLException {
 		
 		Connection connessione = null;
 		PreparedStatement statement = null;
@@ -255,7 +255,7 @@ public synchronized boolean modifyUtentePsw(UserBean user,String psw)  throws SQ
 	}
 		return (result != 0);
 	}
-public synchronized boolean modifyUtenteUsername(UserBean user,String Username)  throws SQLException {
+public synchronized boolean modifyUtenteUsername(userBean user,String Username)  throws SQLException {
 	
 	Connection connessione = null;
 	PreparedStatement statement = null;

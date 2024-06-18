@@ -7,8 +7,8 @@ import java.sql.SQLException;
 import java.util.Collection;
 import java.util.LinkedList;
 
-import Bean.depositoBean;
-import Bean.genereBean;
+import bean.depositoBean;
+import bean.genereBean;
 
 
 

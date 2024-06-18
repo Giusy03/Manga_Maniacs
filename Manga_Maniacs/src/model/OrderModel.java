@@ -13,8 +13,8 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
-import Bean.OrderBean;
-import Bean.mangaBean;
+import bean.orderBean;
+import bean.mangaBean;
 
 import model.DriverManagerConnectionPool;
 import model.CartModel;
@@ -26,10 +26,10 @@ public class OrderModel {
 	private static final String TABLE_NAME = "ordine";
 
 	
-	public Collection<OrderBean> AllUserOrder(int id) throws SQLException{
+	public Collection<orderBean> AllUserOrder(int id) throws SQLException{
 		Connection connessione = null;
 		PreparedStatement statement = null;
-		Collection<OrderBean> ordini = new LinkedList<OrderBean>();
+		Collection<orderBean> ordini = new LinkedList<orderBean>();
 		Collection<mangaBean> mangas = new LinkedList<mangaBean>();
 		
 		String sql = "SELECT * FROM " +TABLE_NAME +" WHERE id_utente = '" + id + "'";
@@ -43,7 +43,7 @@ public class OrderModel {
 		
 		while(rs.next()) {
 			
-			OrderBean order = new OrderBean();
+			orderBean order = new orderBean();
 			
 			order.setId(rs.getInt("id"));
 			order.setSomma_tot(rs.getDouble("somma_tot"));
@@ -60,11 +60,11 @@ public class OrderModel {
 		return ordini;
 	}
 	
-	public Collection<OrderBean> AllAdminOrder() throws SQLException{
+	public Collection<orderBean> AllAdminOrder() throws SQLException{
 		
 		Connection connessione = null;
 		PreparedStatement statement = null;
-		Collection<OrderBean> ordini = new LinkedList<OrderBean>();
+		Collection<orderBean> ordini = new LinkedList<orderBean>();
 		
 		String sql = "SELECT * FROM " + TABLE_NAME;
 		connessione = DriverManagerConnectionPool.getConnection();
@@ -74,7 +74,7 @@ public class OrderModel {
 		
 		while(rs.next()) {
 			
-			OrderBean order = new OrderBean();
+			orderBean order = new orderBean();
 			
 			order.setId(rs.getInt("id"));
 			order.setIva_tot(rs.getDouble("iva_tot"));
@@ -89,7 +89,7 @@ public class OrderModel {
 		return ordini;
 	}
 	
-	public void doSave (OrderBean order, CartModel cart) throws SQLException {
+	public void doSave (orderBean order, CartModel cart) throws SQLException {
 		
 		Connection connessione = null;
 		PreparedStatement statement = null;
@@ -131,7 +131,7 @@ public class OrderModel {
 		DriverManagerConnectionPool.releaseConnection(connessione);
 	}
 	
-	public synchronized OrderBean ultimoOrdine()  throws SQLException {
+	public synchronized orderBean ultimoOrdine()  throws SQLException {
 	    Connection connessione = null;
 	    PreparedStatement statement = null;
 
@@ -146,7 +146,7 @@ public class OrderModel {
 	    ResultSet rs = statement.executeQuery(selectSQL);
 
 	    if(rs.next()){
-	    	OrderBean order =new OrderBean();
+	    	orderBean order =new orderBean();
 
 	        order.setId(rs.getInt("id"));
 
@@ -175,11 +175,11 @@ public class OrderModel {
 
 	}
 	
-	public OrderBean viewOrderDetails(int id) throws SQLException {
+	public orderBean viewOrderDetails(int id) throws SQLException {
 		
 		Connection connessione = null;
 		PreparedStatement statement = null;
-		OrderBean order = new OrderBean();
+		orderBean order = new orderBean();
 		ArrayList<mangaBean> mangas = new ArrayList<mangaBean>();
 		System.out.println("Entro nel dettaglio");
 		

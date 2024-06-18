@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.Collection;
 import java.util.LinkedList;
 
-import Bean.genereBean;
+import bean.genereBean;
 
 
 public class genereModel {

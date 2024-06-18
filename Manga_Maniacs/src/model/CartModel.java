@@ -2,7 +2,7 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-import Bean.mangaBean;
+import bean.mangaBean;
 
 
 public class CartModel {

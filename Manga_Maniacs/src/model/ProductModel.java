@@ -8,7 +8,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-import Bean.mangaBean;
+import bean.mangaBean;
 
 import model.DriverManagerConnectionPool;
 
