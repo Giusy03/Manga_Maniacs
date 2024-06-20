@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Bean.UserBean;
-import Bean.mangaBean;
+import bean.userBean;
+import bean.mangaBean;
 import model.DepositoModel;
 import model.ProductModel;
 import model.genereModel;
