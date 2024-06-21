@@ -6,18 +6,12 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collection;
 import java.util.LinkedList;
-import java.util.List;
-
 import bean.orderBean;
 import bean.mangaBean;
 
-import model.DriverManagerConnectionPool;
-import model.CartModel;
 import java.time.LocalDate;   
 
 
@@ -30,7 +24,6 @@ public class OrderModel {
 		Connection connessione = null;
 		PreparedStatement statement = null;
 		Collection<orderBean> ordini = new LinkedList<orderBean>();
-		Collection<mangaBean> mangas = new LinkedList<mangaBean>();
 		
 		String sql = "SELECT * FROM " +TABLE_NAME +" WHERE id_utente = '" + id + "'";
 		
@@ -105,7 +98,6 @@ public class OrderModel {
 		statement.setDouble(2, order.getIva_tot());
 		statement.setDouble(3, model.CartModel.calcolaTotale());
 		
-		SimpleDateFormat dtf = new SimpleDateFormat("yyyy/MM/dd");
 		LocalDate data_ordine = LocalDate.now();
 		statement.setDate(4, Date.valueOf(data_ordine));
 		

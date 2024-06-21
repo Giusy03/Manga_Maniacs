@@ -8,7 +8,6 @@ import java.util.Collection;
 import java.util.LinkedList;
 
 import bean.depositoBean;
-import bean.genereBean;
 
 
 

@@ -33,14 +33,12 @@ public class mangaModificControl extends HttpServlet {
      */
     public mangaModificControl() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		String action =(String)request.getParameter("action");
 		int id;
 		System.out.println("azione=="+action);
@@ -52,7 +50,6 @@ public class mangaModificControl extends HttpServlet {
 							if(request.getParameter("deposito")!=null)
 							modelDep.modifyConteiner(addDeposito(request));
 						} catch (SQLException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 					
@@ -93,7 +90,6 @@ public class mangaModificControl extends HttpServlet {
 				}
 					
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		
@@ -161,7 +157,6 @@ protected mangaBean addManga(HttpServletRequest request) throws ServletException
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

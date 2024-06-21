@@ -10,8 +10,6 @@ import java.util.LinkedList;
 
 import bean.userBean;
 
-import model.DriverManagerConnectionPool;
-
 public class userDAO {
 	private static final String TABLE_NAME = "utente";
 	/*public void selectTable( )  throws SQLException {

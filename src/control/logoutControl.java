@@ -22,16 +22,14 @@ public class logoutControl extends HttpServlet {
      */
     public logoutControl() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
-		request.getSession().setAttribute("user",null);
+		session.setAttribute("user",null);
 		
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/manga");
@@ -42,7 +40,6 @@ public class logoutControl extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

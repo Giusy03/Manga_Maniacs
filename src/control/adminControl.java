@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import bean.userBean;
-import bean.mangaBean;
 import model.DepositoModel;
 import model.ProductModel;
 import model.genereModel;
@@ -33,7 +32,6 @@ public class adminControl extends HttpServlet {
      */
     public adminControl() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -54,7 +52,6 @@ public class adminControl extends HttpServlet {
 							try {
 								request.setAttribute("mangas", model.doRetrieveAllAdmin(""));
 							} catch (SQLException e) {
-								// TODO Auto-generated catch block
 								e.printStackTrace();
 							}
 						
@@ -65,7 +62,6 @@ public class adminControl extends HttpServlet {
 						try {
 							model.doDelete(Integer.parseInt(id));
 						} catch (SQLException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 						RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/MangaView.jsp");
@@ -79,7 +75,6 @@ public class adminControl extends HttpServlet {
 							request.setAttribute("manga", model.selectMangaAdmin(id));
 							
 						} catch (SQLException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 						RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/ModificManga.jsp");
@@ -92,7 +87,6 @@ public class adminControl extends HttpServlet {
 					
 					
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/newManga.jsp");
@@ -104,7 +98,6 @@ public class adminControl extends HttpServlet {
 					
 					
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/viewUtenti.jsp");
@@ -120,7 +113,6 @@ public class adminControl extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

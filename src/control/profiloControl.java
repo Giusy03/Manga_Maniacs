@@ -1,7 +1,6 @@
 package control;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
@@ -13,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import bean.userBean;
 import model.OrderModel;
-import model.userDAO;
 
 /**
  * Servlet implementation class profiloControl
@@ -29,15 +27,12 @@ public class profiloControl extends HttpServlet {
      */
     public profiloControl() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-			
 		userBean user = (userBean) request.getSession().getAttribute("user");
 		
 		String action =(String)request.getParameter("action");
@@ -49,7 +44,6 @@ public class profiloControl extends HttpServlet {
 					request.setAttribute("order",od.AllUserOrder(user.getId()));
 					System.out.println("ordini utente scelto reperiti");
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				
@@ -73,7 +67,6 @@ public class profiloControl extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

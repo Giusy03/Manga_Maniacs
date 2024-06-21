@@ -10,8 +10,6 @@ import java.util.LinkedList;
 
 import bean.mangaBean;
 
-import model.DriverManagerConnectionPool;
-
 
 public class ProductModel  {
 	static genereModel modelGen = new genereModel() ;
