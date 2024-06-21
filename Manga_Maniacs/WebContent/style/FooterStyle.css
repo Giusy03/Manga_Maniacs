@@ -1,0 +1,27 @@
+@charset "ISO-8859-1";
+
+
+
+.footer{
+	font-family: Verdana, sans-serif;
+	
+	position: absolute;
+	botton: 30px;
+	
+
+	
+	background-color: #ff8000;
+	
+}
+
+.footer h1{
+	
+	font-size: 30px;
+	white-space: none;
+}
+
+.footer p{
+	
+	font-size: 15px;
+	
+}
