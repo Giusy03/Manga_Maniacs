@@ -16,9 +16,7 @@
     <nav>
         <ul>
             <li><a href="index.jsp">Home</a></li>
-            <li><a href="Login.jsp">Login</a></li>
-            <li><a href="registrazione.jsp">Registrazione</a></li>
-            <li><a href="ListaManga.jsp">Lista Manga</a></li>
+            <li><a href="Login.jsp">Accedi</a></li>
         </ul>
     </nav>
     <main>
@@ -35,9 +33,7 @@
         <section>
             <h2>Unisciti alla Comunità</h2>
             <p>Registrati per unirti alla comunità di Manga Maniacs e connetterti con altri appassionati di manga.</p>
-            <form action="registrazione.jsp" method="get">
-                <input type="submit" value="Registrati">
-            </form>
+            <button onclick="Login.jsp">Registrati</button>
         </section>
     </main>
     <footer>
