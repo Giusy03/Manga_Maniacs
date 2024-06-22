@@ -15,14 +15,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import bean.mangaBean;
+import Bean.mangaBean;
 import model.ProductModel;
 
 
 /**
  * Servlet implementation class AjaxSearch
  */
-@WebServlet("/AjaxSearch")
+@WebServlet("/AS")
 public class AjaxSearch extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -47,9 +47,9 @@ public class AjaxSearch extends HttpServlet {
 		ProductModel model = new ProductModel();
 		Collection<mangaBean> mangaka = null;
 		
-		
+		String titolo =(String)request.getParameter("titolo");
 		try {
-			mangaka = model.doRetrieveAll("");
+			mangaka = model.doRetrieveAllFilter(null, null, null, null, null, titolo);
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
@@ -63,7 +63,7 @@ public class AjaxSearch extends HttpServlet {
 				json.put("id",manga.getId());
 				json.put( "Titolo",manga.getTitolo());
 				json.put("img",manga.getImg());
-				
+				json.put("generi",manga.getGeneri());
 				jArray.put(json);
 				}
 			

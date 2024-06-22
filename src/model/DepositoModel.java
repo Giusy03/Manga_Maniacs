@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.Collection;
 import java.util.LinkedList;
 
-import bean.depositoBean;
+import Bean.depositoBean;
 
 
 
@@ -51,72 +51,88 @@ private static final String TABLE_NAME_CONTEINER = "collocamento";
 				statement.close();
 		} finally {
 			DriverManagerConnectionPool.releaseConnection(connessione);
-		}
-
-	}
-		return beans;
-	}
-	public synchronized Collection<depositoBean> RetrieveAllByIdManga(int id)  throws SQLException {
-		Connection connessione = null;
-		PreparedStatement statement = null;
-		Collection<depositoBean> beans = new LinkedList<depositoBean>();
-		
-		
-		String selectSQL = "SELECT id_deposito,id_manga,disponibilita,nome FROM unlimitedmanga.manga" 
-			+"	inner join  unlimitedmanga.collocamento"
-			+"	 on manga.id=collocamento.id_manga "
-			+"	join  unlimitedmanga.deposito "
-				+" on deposito.id=collocamento.id_deposito"
-				+" where   manga.id='"+id+"'";
-		
-		
-		
-		
-	
-	    
-		try {
-			
-			connessione = DriverManagerConnectionPool.getConnection();
-			statement = connessione.prepareStatement(selectSQL);
-		
-			ResultSet rs = statement.executeQuery(selectSQL);
-			while (rs.next()) {
-				 depositoBean deposito = new depositoBean();
-			
-				deposito.setId(rs.getInt("id_deposito"));
-				deposito.setId_prodotto(rs.getInt("id_manga"));
-				deposito.setNome((String)rs.getString("nome"));
-				deposito.setQuantity(rs.getInt("disponibilita"));
-				
-				
-				
-				beans.add(deposito);
 			}
-	}finally {
-		try {
-			if (statement != null)
-				statement.close();
-		} finally {
-			DriverManagerConnectionPool.releaseConnection(connessione);
-		}
 
-	}
+		}
 		return beans;
 	}
+	
+	public synchronized Collection<depositoBean> RetrieveAllByIdManga(int id) throws SQLException {
+	    Connection connessione = null;
+	    PreparedStatement statement = null;
+	    Collection<depositoBean> beans = new LinkedList<depositoBean>();
+
+	    String selectSQL = "SELECT id_deposito, id_manga, disponibilita, nome FROM mangamaniacs.manga"
+	        + " INNER JOIN mangamaniacs.collocamento ON manga.id = collocamento.id_manga"
+	        + " JOIN mangamaniacs.deposito ON deposito.id = collocamento.id_deposito"
+	        + " WHERE manga.id = ?"
+	        + " GROUP BY id_deposito, id_manga, disponibilita, nome";
+
+	    try {
+	        connessione = DriverManagerConnectionPool.getConnection();
+	        statement = connessione.prepareStatement(selectSQL);
+	        statement.setInt(1, id);
+
+	        ResultSet rs = statement.executeQuery();
+	        while (rs.next()) {
+	            depositoBean deposito = new depositoBean();
+	            deposito.setId(rs.getInt("id_deposito"));
+	            deposito.setId_prodotto(rs.getInt("id_manga"));
+	            deposito.setNome(rs.getString("nome"));
+	            deposito.setQuantity(rs.getInt("disponibilita"));
+	            beans.add(deposito);
+	        }
+	    } finally {
+	        try {
+	            if (statement != null) statement.close();
+	        } finally {
+	            DriverManagerConnectionPool.releaseConnection(connessione);
+	        }
+	    }
+	    return beans;
+	}
+
+	public synchronized boolean CollocamentoEsiste(depositoBean deposito) throws SQLException {
+	    Connection connessione = null;
+	    PreparedStatement statement = null;
+
+	    String selectSQL = "SELECT id_deposito, id_manga, disponibilita, nome FROM mangamaniacs.manga"
+	        + " INNER JOIN mangamaniacs.collocamento ON manga.id = collocamento.id_manga"
+	        + " JOIN mangamaniacs.deposito ON deposito.id = collocamento.id_deposito"
+	        + " WHERE manga.id = ? AND collocamento.id_deposito = ?"
+	        + " GROUP BY id_deposito, id_manga, disponibilita, nome";
+
+	    try {
+	        connessione = DriverManagerConnectionPool.getConnection();
+	        statement = connessione.prepareStatement(selectSQL);
+	        statement.setInt(1, deposito.getId_prodotto());
+	        statement.setInt(2, deposito.getId());
+
+	        ResultSet rs = statement.executeQuery();
+	        return rs.next();
+	    } finally {
+	        try {
+	            if (statement != null) statement.close();
+	        } finally {
+	            DriverManagerConnectionPool.releaseConnection(connessione);
+	        }
+	    }
+	}
+	
 	public synchronized Collection<depositoBean> notInRetrieveAllByIdManga(int id)  throws SQLException {
 		Connection connessione = null;
 		PreparedStatement statement = null;
 		Collection<depositoBean> beans = new LinkedList<depositoBean>();
 		
 		
-		String selectSQL = "SELECT id,nome FROM unlimitedmanga.deposito"
-				+ "where id not in "
-				+ "Select id_deposito FROM unlimitedmanga.manga"
-				+ "inner join unlimitedmanga.collocamento"
-				+ "on manga.id=collocamento.id_manga"
-				+ "Join unlimitedmanga.deposito"
-				+ "on deposito.id=collocamento.id_deposito"
-				+ "where manga.id="+id+"";
+		String selectSQL = "SELECT id,nome FROM mangamaniacs.deposito "
+				+ "where id not in ( "
+				+ "Select id_deposito FROM mangamaniacs.manga "
+				+ "inner join mangamaniacs.collocamento "
+				+ "on manga.id=collocamento.id_manga "
+				+ "Join mangamaniacs.deposito "
+				+ "on deposito.id=collocamento.id_deposito "
+				+ "where manga.id='"+id+"' ) ";
 				
 				
 			
@@ -136,10 +152,10 @@ private static final String TABLE_NAME_CONTEINER = "collocamento";
 			while (rs.next()) {
 				 depositoBean deposito = new depositoBean();
 			
-				deposito.setId(rs.getInt("id_deposito"));
-				deposito.setId_prodotto(rs.getInt("id_manga"));
+				deposito.setId(rs.getInt("id"));
+				deposito.setId_prodotto(id);
 				deposito.setNome((String)rs.getString("nome"));
-				deposito.setQuantity(rs.getInt("disponibilita"));
+				
 				
 				
 				
@@ -228,7 +244,7 @@ public synchronized boolean addConteiner(depositoBean deposito)  throws SQLExcep
 	}
 		return (result != 0);
 	} 
-	
-	
-	
+
 }
+
+	

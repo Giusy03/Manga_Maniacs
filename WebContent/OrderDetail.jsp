@@ -1,7 +1,7 @@
-<%@ page language="java" pageEncoding="ISO-8859-1" import="java.util.*,bean.mangaBean,bean.userBean, bean.orderBean"%>
+<%@ page language="java" pageEncoding="ISO-8859-1" import="java.util.*,Bean.mangaBean,Bean.UserBean, Bean.OrderBean"%>
 
 <%
-	orderBean order = (orderBean)request.getAttribute("order");
+	OrderBean order = (OrderBean)request.getAttribute("order");
 	if(order == null) {
 		response.sendRedirect("./OrderUser");	
 	}
@@ -21,22 +21,32 @@
 <title>Dettaglio ordine</title>
 </head>
 <body>
+<%@include file="Header.jsp"  %>
+<%@include file="navbar.jsp"  %>
 
 	<h3>Dettaglio ordine selezionato</h3>
 
-	<table>
-		<tr>
-			<th>Titolo</th>
-			<th>Editore</th>
-			<th>Autore</th>
-			<th>Iva</th>
-			<th>Prezzo</th>
-			<th>Quantità</th>
-			<th>Data ordine</th>
-			<th>Immagine Prodotto</th>
-			
-		</tr>
+	<h3>Totale pagato:<%=order.getSomma_tot() %>&euro;</h3>
+
+	
+	<table class="table">
+	  <thead>
+	    <tr>
+	     <th class="col">Titolo</th>
 		
+			
+			<th class="col">Iva</th>
+			
+			<th class="col">Prezzo</th>
+			
+			<th class="col">Quantità</th>
+			
+			<th class="col">Data ordine</th>
+			
+			
+	    </tr>
+	  </thead>
+		<tbody>
 		<%
 			
 		ArrayList<mangaBean> mangas = order.getManga();
@@ -50,25 +60,30 @@
 		<tr>
 		
 			<th><%=manga.getTitolo() %></th>
-			<th><%=manga.getEditore() %></th>
-			<th><%=manga.getAutore() %></th>
-			<th><%=manga.getIva() %></th>
-			<th><%=manga.getPrezzo() %></th>
+			
+			
+			<th><%=manga.getIva() %>%</th>
+			
+			<th><%=manga.getPrezzo() %>&euro;</th>
+			
 			<th><%=manga.getQuantita() %></th>
 			
-			<th><%=order.getData_ordine() %></th>	
-			<th><img src="<%=manga.getImg() %>" width=100></th>
+			
+			<th><%=order.getData_ordine() %></th>
+			
+		
 			
 		
 		</tr>
 			<%
 				}
 			%>
-			
-			<h3>Totale pagato:<%=order.getSomma_tot() %></h3>
+			</tbody>
+		
 		
 		
 	</table>
 
+	<%@include file="footer.jsp" %>
 </body>
 </html>

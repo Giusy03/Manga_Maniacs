@@ -56,11 +56,9 @@ nav{
 
 
 .sugerimento {
-	    margin: 15%;
-    margin-top: 6%;
-    display: block;
-    position: absolute;
-    top: 34px;
+	margin: 0% 22% 25%;
+	position: absolute;
+    top: 58px;
     left: 0;
     right: 0;
     background: #fff;
@@ -71,6 +69,22 @@ nav{
     overflow: hidden;
     z-index: 999;
 }
+
+.info {
+    margin-left: 50px;
+    color: #8c8c8c;
+    font-size: .9rem;
+
+
+p {
+    margin: 0 0 9px;
+}
+
+a {
+    color: #ff8000;;
+    text-decoration: none;
+}
+
 .list-group {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -81,6 +95,7 @@ nav{
     flex-direction: column;
     padding-left: 0;
     margin-bottom: 0;
+}
 
 
 

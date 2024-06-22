@@ -4,6 +4,8 @@ package control;
 import java.io.IOException;
 
 import java.sql.SQLException;
+import java.util.Collection;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Bean.genereBean;
+import Bean.mangaBean;
 import model.ProductModel;
 import model.genereModel;
 /**
@@ -38,46 +42,103 @@ public class catalogoControlV2 extends HttpServlet {
 		
 		String sort =(String)request.getParameter("sort");
 		String genere =(String)request.getParameter("genere");
-		System.out.println(genere);
-         if(genere!=null){
-			
-        	 try {
-     			
- 				request.removeAttribute("products");
- 				request.setAttribute("products",model.doRetrieveAllGenere(Integer.parseInt(request.getParameter("genere"))) ); 
- 				
- 				
- 				
- 				
- 			} catch (  SQLException e) {
- 				
- 				System.out.println("Error:" + e.getMessage());
- 			}
+		String titolo =(String)request.getParameter("titolo");
+		
+		
+		String action =(String)request.getParameter("action");
+		if(action!=null && action.equals("filter"))
+		{
+		
+				String [] generi = request.getParameterValues("generi");
+				String [] editori = request.getParameterValues("Editore");
+				String [] anni = request.getParameterValues("Anno");
+				String []  autori = request.getParameterValues("Autore");
+				String  ordine = request.getParameter("Ordina");
+				String Titolo = request.getParameter("titolo");
+				
+			 	 try {
+		     			
+		 				request.removeAttribute("products");
+		 				request.setAttribute("products",model.doRetrieveAllFilter(ordine, autori, anni, editori, generi, Titolo) ); 
+		 				
+		 				
+		 				
+		 				
+		 			} catch (  SQLException e) {
+		 				
+		 				System.out.println("Error:" + e.getMessage());
+		 			}
 
- 			RequestDispatcher dispatcher = request.getRequestDispatcher("/MangaView.jsp");
- 			dispatcher.forward(request, response);
- 			
+		 			RequestDispatcher dispatcher = request.getRequestDispatcher("/catalogo.jsp");
+		 			dispatcher.forward(request, response);
+		 			
+			
+			
+			
+		}else {
+			
+
+	         if(genere!=null){
+				
+	        	 try {
+	     			
+	 				request.removeAttribute("products");
+	 				request.setAttribute("products",model.doRetrieveAllGenere(Integer.parseInt(request.getParameter("genere"))) ); 
+	 				
+	 				
+	 				
+	 				
+	 			} catch (  SQLException e) {
+	 				
+	 				System.out.println("Error:" + e.getMessage());
+	 			}
+
+	 			RequestDispatcher dispatcher = request.getRequestDispatcher("/catalogo.jsp");
+	 			dispatcher.forward(request, response);
+	 			
+			}
+		
+
+			else if(titolo!=null)  {
+
+				try {
+				
+					request.removeAttribute("products");
+					request.setAttribute("products",model.doRetrieveAllTitolo(titolo) ); 
+					
+					
+					
+					
+				} catch (  SQLException e) {
+					
+					System.out.println("Error:" + e.getMessage());
+				}
+
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/catalogo.jsp");
+				dispatcher.forward(request, response);
+				}else
+				{
+
+					try {
+					
+						request.removeAttribute("products");
+						request.setAttribute("products",model.doRetrieveAll(sort) ); 
+						
+						
+						
+						
+					} catch (  SQLException e) {
+						
+						System.out.println("Error:" + e.getMessage());
+					}
+
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/catalogo.jsp");
+					dispatcher.forward(request, response);
+					}
+				
+			
+			
 		}
-	
-
-		else  {
-
-			try {
-			
-				request.removeAttribute("products");
-				request.setAttribute("products",model.doRetrieveAll(sort) ); 
-				
-				
-				
-				
-			} catch (  SQLException e) {
-				
-				System.out.println("Error:" + e.getMessage());
-			}
-
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/MangaView.jsp");
-			dispatcher.forward(request, response);
-			}
 		
 	}
 		

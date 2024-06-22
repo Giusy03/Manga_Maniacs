@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.Collection;
 import java.util.LinkedList;
 
-import bean.genereBean;
+import Bean.genereBean;
 
 
 public class genereModel {
@@ -39,6 +39,7 @@ private static final String TABLE_NAME_CONTEINER = "appartiene";
 				genere.setId(rs.getInt("id"));
 				
 				genere.setNome((String)rs.getString("nome"));
+				genere.setDescrizione((String)rs.getString("descrizione"));
 				
 				
 				
@@ -61,10 +62,10 @@ private static final String TABLE_NAME_CONTEINER = "appartiene";
 		Collection<genereBean> beans = new LinkedList<genereBean>();
 		
 		
-		String selectSQL = "SELECT id_genere,id_manga,nome,nome FROM unlimitedmanga.manga" 
-			+"	inner join  unlimitedmanga.appartiene"
+		String selectSQL = "SELECT id_genere,id_manga,nome,nome FROM mangamaniacs.manga" 
+			+"	inner join  mangamaniacs.appartiene"
 			+"	 on manga.id=appartiene.id_manga "
-			+"	join  unlimitedmanga.genere "
+			+"	join  mangamaniacs.genere "
 				+" on genere.id=appartiene.id_genere"
 				+" where    manga.id='"+id+"'";
 		
@@ -85,7 +86,6 @@ private static final String TABLE_NAME_CONTEINER = "appartiene";
 				genere.setId(rs.getInt("id_genere"));
 				genere.setId_prodotto(rs.getInt("id_manga"));
 				genere.setNome((String)rs.getString("nome"));
-			
 				
 				
 				
@@ -111,7 +111,7 @@ private static final String TABLE_NAME_CONTEINER = "appartiene";
 		String deletSQL =  "DELETE FROM " + genereModel.TABLE_NAME_CONTEINER + " WHERE id_genere = ?  && id_manga= ? ";
 				
 		try {
-			System.out.println(deletSQL);
+			//System.out.println(deletSQL);
 			connessione = DriverManagerConnectionPool.getConnection();
 			statement = connessione.prepareStatement(deletSQL);
 			
@@ -120,10 +120,45 @@ private static final String TABLE_NAME_CONTEINER = "appartiene";
 			statement.setInt(2,genere.getId_prodotto());
 			
 		
-			System.out.println((String)statement.toString());
+			//System.out.println((String)statement.toString());
 
 			result=statement.executeUpdate();
-	System.out.println("risultalto "+result);
+	//System.out.println("risultalto "+result);
+			connessione.commit();
+		
+	}finally {
+		try {
+			if (statement != null)
+				statement.close();
+		} finally {
+			if (connessione != null)
+				connessione.close();
+		}
+	}
+		return (result != 0);
+	} 
+public synchronized boolean deletAllById(int id)  throws SQLException {
+		
+		Connection connessione = null;
+		PreparedStatement statement = null;
+		int result = 0;
+		
+		String deletSQL =  "DELETE FROM " + genereModel.TABLE_NAME_CONTEINER + " WHERE  id_manga= ? ";
+				
+		try {
+			//System.out.println(deletSQL);
+			connessione = DriverManagerConnectionPool.getConnection();
+			statement = connessione.prepareStatement(deletSQL);
+			
+		
+			
+			statement.setInt(1,id);
+			
+		
+			//System.out.println((String)statement.toString());
+
+			result=statement.executeUpdate();
+	//System.out.println("risultalto "+result);
 			connessione.commit();
 		
 	}finally {
@@ -148,7 +183,7 @@ private static final String TABLE_NAME_CONTEINER = "appartiene";
 				+ " (id_genere,id_manga) VALUES ( ?, ?)";
 				
 		try {
-			System.out.println(deletSQL);
+			//System.out.println(deletSQL);
 			connessione = DriverManagerConnectionPool.getConnection();
 			statement = connessione.prepareStatement(deletSQL);
 			
@@ -157,10 +192,10 @@ private static final String TABLE_NAME_CONTEINER = "appartiene";
 			statement.setInt(2,genere.getId_prodotto());
 			
 		
-			System.out.println((String)statement.toString());
+			//System.out.println((String)statement.toString());
 
 			result=statement.executeUpdate();
-	System.out.println("risultalto "+result);
+	//System.out.println("risultalto "+result);
 			connessione.commit();
 		
 	}finally {
@@ -218,15 +253,15 @@ public synchronized boolean doDelete(int id)  throws SQLException {
 	String deletSQL =  "DELETE FROM " + genereModel.TABLE_NAME + " WHERE id = ?";
 			
 	try {
-		System.out.println(deletSQL);
+		//System.out.println(deletSQL);
 		connessione = DriverManagerConnectionPool.getConnection();
 		statement = connessione.prepareStatement(deletSQL);
 		statement.setInt(1,id);
 	
-		System.out.println((String)statement.toString());
+		//System.out.println((String)statement.toString());
 
 		result=statement.executeUpdate();
-
+		connessione.commit();
 	
 	
 }finally {

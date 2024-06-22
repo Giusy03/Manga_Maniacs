@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 //import javax.servlet.http.HttpSession;
 
-import bean.userBean;
+import Bean.UserBean;
 
 
 
@@ -40,7 +40,7 @@ public class loginServlet extends HttpServlet {
 		
 		 
 			
-			userBean utente=new userBean();
+			UserBean utente=new UserBean();
 			
 			
 			
@@ -55,7 +55,10 @@ public class loginServlet extends HttpServlet {
 												request.getSession().setAttribute("user",utente);
 							
 												
-												
+					if(utente.isAmministratore())
+					
+						redirectedPage = "/adminControl";
+					else
 						redirectedPage = "/manga";
 					
 				
@@ -74,10 +77,10 @@ public class loginServlet extends HttpServlet {
 				
 		
 	
-	private userBean checkLogin(String username, String password)throws Exception{
+	private UserBean checkLogin(String username, String password)throws Exception{
 		
 		userDAO model= new userDAO();
-		userBean utente=null;
+		UserBean utente=null;
 		
 		
 			utente =model.signIn(username,password);

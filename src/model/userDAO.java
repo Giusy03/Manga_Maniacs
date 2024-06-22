@@ -8,45 +8,18 @@ import java.sql.SQLException;
 import java.util.Collection;
 import java.util.LinkedList;
 
-import bean.userBean;
+import Bean.UserBean;
+
+import model.DriverManagerConnectionPool;
 
 public class userDAO {
 	private static final String TABLE_NAME = "utente";
-	/*public void selectTable( )  throws SQLException {
-		Connection connessione = null;
-		PreparedStatement statement = null;
-		
-		ResultSet ris ;
-		System.out.println("0");
-		String query ="SELECT * FROM utente ";
-		try {
-			System.out.println("1");
-			connessione =DriverManagerConnectionPool.getConnection();
-			System.out.println("2");
-			statement = connessione.prepareStatement(query);
-			System.out.println("3");
-			ris =statement.executeQuery();
-			System.out.println("4");
-			if (ris.next()) {
-				System.out.println(ris.getString("username"));
-			}
-			
-		}finally {
-			try {
-				if(statement != null)
-					statement.close();
-			}finally {
-				DriverManagerConnectionPool.releaseConnection(connessione);
-			}
-		}
-		}*/
-		
 	
 	
-	public userBean signIn(String username, String password) throws SQLException {
+	public UserBean signIn(String username, String password) throws SQLException {
 		Connection connessione = null;
 		PreparedStatement statement = null;
-		userBean utente;
+		UserBean utente;
 		String query = "SELECT * FROM "+TABLE_NAME+" WHERE username = '" + username + "' && psw = '" + password +"'";
 		try {
 			connessione = DriverManagerConnectionPool.getConnection();
@@ -57,7 +30,7 @@ public class userDAO {
 
 			if(rs.next()) {
 		
-				utente = new userBean();
+				utente = new UserBean();
 				utente.setId(rs.getInt("id"));
 				utente.setUsername(rs.getString("username"));
 				
@@ -87,7 +60,7 @@ public class userDAO {
 		}
 	}
 	
-	public userBean signUp(String username, String password) throws SQLException {
+	public UserBean signUp(String username, String password) throws SQLException {
 		
 			Connection connessione = null;
 			PreparedStatement statement = null;
@@ -127,11 +100,11 @@ public class userDAO {
 		
 		return null;
 	}
-	public synchronized Collection<userBean> RetrieveAll()  throws SQLException {
+	public synchronized Collection<UserBean> RetrieveAll()  throws SQLException {
 
 		Connection connessione = null;
 		PreparedStatement statement = null;
-		Collection<userBean> beans = new LinkedList<userBean>();
+		Collection<UserBean> beans = new LinkedList<UserBean>();
 		
 		
 		String selectSQL  = "SELECT * FROM "+TABLE_NAME ;
@@ -148,10 +121,13 @@ public class userDAO {
 		
 			ResultSet rs = statement.executeQuery(selectSQL);
 			while (rs.next()) {
-				userBean utente = new userBean();
+				UserBean utente = new UserBean();
 			
-utente.setUsername(rs.getString("username"));
 				
+				utente.setId(rs.getInt("id"));
+				utente.setUsername(rs.getString("username"));
+				
+		
 				utente.setPwd(rs.getString("psw"));
 				utente.setEmail(rs.getString("email"));
 				
@@ -179,7 +155,7 @@ utente.setUsername(rs.getString("username"));
 		return beans;
 	}
 	
-	public synchronized boolean modifyUtenteDati(userBean user)  throws SQLException {
+	public synchronized boolean modifyUtenteDati(UserBean user)  throws SQLException {
 		
 		Connection connessione = null;
 		PreparedStatement statement = null;
@@ -216,7 +192,7 @@ utente.setUsername(rs.getString("username"));
 	}
 		return (result != 0);
 	}
-public synchronized boolean modifyUtentePsw(userBean user,String psw)  throws SQLException {
+public synchronized boolean modifyUtentePsw(UserBean user,String psw)  throws SQLException {
 		
 		Connection connessione = null;
 		PreparedStatement statement = null;
@@ -253,7 +229,7 @@ public synchronized boolean modifyUtentePsw(userBean user,String psw)  throws SQ
 	}
 		return (result != 0);
 	}
-public synchronized boolean modifyUtenteUsername(userBean user,String Username)  throws SQLException {
+public synchronized boolean modifyUtenteUsername(UserBean user,String Username)  throws SQLException {
 	
 	Connection connessione = null;
 	PreparedStatement statement = null;

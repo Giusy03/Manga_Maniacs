@@ -4,13 +4,14 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import bean.userBean;
+import Bean.UserBean;
 import model.userDAO;
 
 /**
@@ -34,7 +35,7 @@ public class AjaxModificaDatiUtente extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-userBean user = (userBean) request.getSession().getAttribute("user");
+UserBean user = (UserBean) request.getSession().getAttribute("user");
 		
 		String action =(String)request.getParameter("action");
 		PrintWriter out= response.getWriter();
@@ -42,7 +43,7 @@ userBean user = (userBean) request.getSession().getAttribute("user");
 		if(user!=null) {
 		if(action != null &&action.equals("modificaDati")) {
 			
-			userBean utente=new userBean(user);
+			UserBean utente=new UserBean(user);
 			utente.setNome((String)request.getParameter("nome"));
 			utente.setCognome((String)request.getParameter("cognome"));
 			utente.setEmail((String)request.getParameter("eMail"));
@@ -121,8 +122,21 @@ userBean user = (userBean) request.getSession().getAttribute("user");
 			
 			
 		}
-		}else {
+		else if(action != null &&action.equals("cambiaAnagrafica")){
+			
+			UserBean utente=new UserBean(user);
+			utente.setNome((String)request.getParameter("nome"));
+			utente.setCognome((String)request.getParameter("cognome"));
+			request.getSession().setAttribute("user",utente);
+			
+			
+			
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/OrderControl?action=completeOrder&step=1");
+			dispatcher.forward(request, response);
+			
+		}else{
 			out.print("<div class='text-danger'> Error Modifica non riuscita </div>");
+		}
 		}
 	}
 

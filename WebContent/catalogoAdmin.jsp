@@ -1,4 +1,4 @@
-<%@ page language="java" pageEncoding="ISO-8859-1" import="java.util.*,bean.mangaBean"%>
+<%@ page language="java" pageEncoding="ISO-8859-1" import="java.util.*,Bean.mangaBean"%>
      <%
 	Collection<?> products = (Collection<?>) request.getAttribute("mangas");
 	if(products == null) {
@@ -10,79 +10,111 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style type="text/css">
+    body{
+    padding-top:60px;
+    }
+    
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+      .parent{
+		text-align:center;
+		}
 
-<title>Insert title here</title>
+</style>
+
+<title>AreaAdmin</title>
 </head>
 <body>
 	<%@include file="Header.jsp" %>
 	<%@include file="AdminNavbar.jsp"  %>
-		
-	
-	<table border="1">
-			<tr>
-				<th>Immagine </th>
-				<th>Titolo <a href="manga?sort=nomeProdotto">Sort</a></th>
-				<th>Prezzo <a href="manga?sort=prezzo">Sort</a></th>
-				<th>Editore <a href="manga?sort=editore">Sort</a></th>
-				<th>Autore <a href="manga?sort=autore">Sort</a></th>
-				<th>Iva <a href="manga?sort=ivaprodotto">Sort</a></th>
-				
-				<th>Description <a href="manga?sort=descrizione">Sort</a></th>
-				<th>Quantita <a href="manga?sort= quantita">Sort</a></th>
-				<th scope="col"></th>
-		     	<th scope="col"></th>			
-				
-				
-				
-				<th>Delete</th>
-			</tr>
-			<%
-				if (products != null && products.size() != 0) {
-					Iterator<?> it = products.iterator();
-					while (it.hasNext()) {
-						mangaBean bean = (mangaBean) it.next();
+		<div class="d-flex justify-content-between align-items-center">
+<form action="adminControl" method="post">
+			<input type="hidden" value="addPage" name="action">
+			<input type="submit" class="btn btn-outline-secondary btn-lg" value="Aggiungi un nuovo articolo">
+		</form>
+		<div>
+		<label for="searchMangaCA" class="form-label">Ricerca tramite username </label>
+			<input class="search" id="searchMangaCA" type="search">
+		</div>
+	</div>
+	 <div class="album py-5 bg-light">
+	    	<div class="container">
+	    	<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+	    	<%
+			if (products != null && products.size() != 0) {
+				Iterator<?> it = products.iterator();
+				while (it.hasNext()) {
+					mangaBean manga = (mangaBean) it.next();
 			%>
-			<tr>
-			<td><img src="<%=bean.getImg()%>" height=100 width=100></td>
-			<td><a href="deteilControl?id=<%= bean.getId() %>"><%= bean.getTitolo() %></a></td>
-			<td><%= bean.getPrezzo()  %></td>
-			<td><%= bean.getEditore()  %></td>
-			<td><%= bean.getAutore()  %></td>
-			<td><%= bean.getIva() %></td>
-			<td><%= bean.getDescrizione() %></td>
-			<td><%= bean.getQuantita() %></td>
+			<div class="col ">
+          		<div class="card shadow-sm prodottoContainer">
+          		<div class="parent">
+            		<img src="<%=manga.getImg() %>" width="200px" height="200px" >
+
+            		<div class="card-body">
+              		<p class="card-text">
+              		
+              			<b data-val="mangaTitolo"><%=manga.getTitolo() %></b>
+              			<br>
+              			<div class="d-flex justify-content-between align-items-center">
+              			<p>&euro;<%=manga.getPrezzo() %></p>
+              		<p>	Quantita:<%=manga.getQuantita() %></p>
+              			</div>
+             
+         
+              		
+           
+             <div align="center">
+           
+             	 <div class="d-flex justify-content-between align-items-center">
 			
-			
-				<td>
 						<form action="adminControl" method="post">
 							<input type="hidden" value="remove" name="action">
-							<input type="hidden" value="<%=bean.getId() %>" name="id">
-							<input type="submit" class="" value="Rimuovi">
+							<input type="hidden" value="<%=manga.getId() %>" name="id">
+							<input type="submit" class="btn btn-sm btn-outline-secondary" value="Rimuovi">
 						</form>
-					</td>
-		      	<td>
+				
 						<form action="adminControl" method="post">
 							<input type="hidden" value="modifyPage" name="action">
-							<input type="hidden" value="<%=bean.getId() %>" name="id">
-							<input type="submit" class="" value="Modifica">
+							<input type="hidden" value="<%=manga.getId() %>" name="id">
+							<input type="submit" class="btn btn-sm btn-outline-secondary" value="Modifica">
 						</form>
-					</td>
-			</tr>
-				<%
+				
+          </div>
+              
+           
+              
+              </div>
+            </div>
+          </div>
+        </div>
+        	</div>
+			<%
+				
 				}
-			} else{
-		%>
-		<tr>
-			<td colspan="6">No products available</td>
-		</tr>
-		<%
-			}
-		%>
-	</table>
-	<form action="adminControl" method="post">
-			<input type="hidden" value="addPage" name="action">
-			<input type="submit" class="btn btn-sm btn-outline-secondary" value="Aggiungi un nuovo articolo">
-		</form>
+				}else {%>
+			<h1>Nessun Prodotto</h1>	
+			<%
+				}
+				%>
+			
+      
+      	</div>
+    </div>
+    </div>
 	
+	
+	<script src="js/catalogoAdmin.js"></script>
 </body>
 </html>

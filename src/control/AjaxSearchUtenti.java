@@ -15,7 +15,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import bean.userBean;
+import Bean.UserBean;
 import model.userDAO;
 
 /**
@@ -43,7 +43,7 @@ public class AjaxSearchUtenti extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		
 		 userDAO model = new userDAO();
-		Collection<userBean> utenti = null;
+		Collection<UserBean> utenti = null;
 		
 		System.out.println("utentiiiiiiiii");
 		
@@ -57,7 +57,7 @@ public class AjaxSearchUtenti extends HttpServlet {
 			
 			JSONArray jArray = new JSONArray();
 			
-			for(userBean utente: utenti) {
+			for(UserBean utente: utenti) {
 				JSONObject json = new JSONObject();
 				json.put("username",utente.getUsername());
 				json.put( "psw",utente.getPwd());

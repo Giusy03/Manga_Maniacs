@@ -1,4 +1,4 @@
-<%@ page language="java" pageEncoding="ISO-8859-1" import="java.util.*,bean.mangaBean,bean.userBean, bean.orderBean"%>
+<%@ page language="java" pageEncoding="ISO-8859-1" import="java.util.*,Bean.mangaBean,Bean.UserBean, Bean.OrderBean"%>
 
 <%
 	Collection<?> order = (Collection<?>) request.getAttribute("order");
@@ -15,7 +15,8 @@
 <title>Riepilogo Ordini</title>
 </head>
 <body>
-
+<%@include file="Header.jsp"  %>
+<%@include file="navbar.jsp"  %>
 	<table>
 		<tr>
 			<th>Prodotti contenuti nell'ordine</th>
@@ -27,7 +28,7 @@
 			if (order != null && order.size() != 0) {
 				Iterator<?> it = order.iterator();
 				while (it.hasNext()) {
-					orderBean bean = (orderBean) it.next();
+					OrderBean bean = (OrderBean) it.next();
 		%>
 		
 		<tr>
@@ -42,7 +43,7 @@
 				}
 			} else {
 		%>
-		     nessun ordine
+		     Nessun Ordine
 		<%
 				
 			} 
@@ -50,5 +51,6 @@
 		
 	</table>
 
+	<%@include file="footer.jsp" %>
 </body>
 </html>

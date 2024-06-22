@@ -2,6 +2,7 @@ package control;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Collection;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,7 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import bean.userBean;
+import Bean.UserBean;
+import Bean.depositoBean;
+import Bean.mangaBean;
 import model.DepositoModel;
 import model.ProductModel;
 import model.genereModel;
@@ -32,19 +35,31 @@ public class adminControl extends HttpServlet {
      */
     public adminControl() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		userBean user =(userBean) request.getSession().getAttribute("user");
+		UserBean user =(UserBean) request.getSession().getAttribute("user");
+		
+		if(user==null)
+		{
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Login.jsp");
+			dispatcher.forward(request, response);
+		}
+		
 		if(!user.isAmministratore())
 		{
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/error.jsp");
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Login.jsp");
 			dispatcher.forward(request, response);
 		}
 		String action =(String)request.getParameter("action");
+		if(request.getAttribute("action")!=null)
+		{
+			action =(String) request.getAttribute("action");
+		}
 		System.out.println("azione=="+action);
 			if(action != null &&action.equals("modCatalogo"))
 			{
@@ -52,6 +67,7 @@ public class adminControl extends HttpServlet {
 							try {
 								request.setAttribute("mangas", model.doRetrieveAllAdmin(""));
 							} catch (SQLException e) {
+								// TODO Auto-generated catch block
 								e.printStackTrace();
 							}
 						
@@ -62,19 +78,30 @@ public class adminControl extends HttpServlet {
 						try {
 							model.doDelete(Integer.parseInt(id));
 						} catch (SQLException e) {
+							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-						RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/MangaView.jsp");
+						RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/adminControl");
+						request.setAttribute("action", "modCatalogo");
 						dispatcher.forward(request, response);
 			}else if(action != null && action.equals("modifyPage")) {
 						try {
 							int id = Integer.parseInt(request.getParameter("id"));
-						System.out.println(modelDep.RetrieveAllByIdManga(id).toString());	
-						request.setAttribute("depositi", modelDep.RetrieveAllByIdManga(id));
+						System.out.println(modelDep.RetrieveAllByIdManga(id).toString());
+						
+						Collection<depositoBean> depositi =  modelDep.RetrieveAllByIdManga(id);
+						depositi.addAll(modelDep.notInRetrieveAllByIdManga(id));
+						
+						request.setAttribute("generi", modelGen.doRetrieveAll());
+						request.setAttribute("depositi",depositi );
 						//request.setAttribute("inDepositi", modelDep.notInRetrieveAllByIdManga(id));
-							request.setAttribute("manga", model.selectMangaAdmin(id));
+						mangaBean manga =model.selectMangaAdmin(id);
+						manga.setGeneri(modelGen.RetrieveAllByIdManga(id));
+						System.out.println(manga.toString());
+							request.setAttribute("manga",manga );
 							
 						} catch (SQLException e) {
+							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 						RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/ModificManga.jsp");
@@ -87,6 +114,7 @@ public class adminControl extends HttpServlet {
 					
 					
 				} catch (SQLException e) {
+					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/newManga.jsp");
@@ -98,11 +126,35 @@ public class adminControl extends HttpServlet {
 					
 					
 				} catch (SQLException e) {
+					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/viewUtenti.jsp");
 				dispatcher.forward(request, response);
+			}else if(action != null && action.equals("modyficaGenere")){
+				
+					
+					try {
+						request.setAttribute("generi",modelGen.doRetrieveAll());
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/ModificaGeneri.jsp");
+					dispatcher.forward(request, response);
+				
+			}else if(action != null && action.equals("addGenere")){
+				
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/AddElement.jsp");
+				dispatcher.forward(request, response);
+			
+		}else{
+			
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/AdminDashboard.jsp");
+				dispatcher.forward(request, response);
+				
 			}
+			
 			
 	}
 		
@@ -113,6 +165,7 @@ public class adminControl extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

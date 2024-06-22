@@ -2,13 +2,13 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-import bean.mangaBean;
+import Bean.mangaBean;
 
 
 public class CartModel {
 
-		private static List<mangaBean> products;
-		private static  List<Integer> quantity;
+		private static ArrayList<mangaBean> products;
+		private static  ArrayList<Integer> quantity;
 
 		public CartModel() {
 			products = new ArrayList<mangaBean>();
@@ -20,12 +20,9 @@ public class CartModel {
 				mangaBean mangaContenitore = products.get(i);
 				if(manga.getId()==mangaContenitore.getId())
 				{
-					Integer cont= quantity.get(i);
-					cont++;
-					 System.out.println("Index oggetto creato i=="+i);
-				 quantity.add(i,cont);
-				 System.out.println("Oggetto creato aggiunto");
-				 return;
+				
+					System.out.println("Oggetto creato aggiunto");
+					return;
 				}
 			
 						
@@ -36,18 +33,21 @@ public class CartModel {
 		}
 		
 		public void deleteProduct(mangaBean manga) {
+			int i=0;
 			for(mangaBean prod : products) {
 				if(prod.getId() == manga.getId()) {
-					products.remove(prod);
+					
+					remove(i);
 					break;
 				}
+				i++;
 			}
 		}
 
-		public List<mangaBean> getProducts() {
+		public ArrayList<mangaBean> getProducts() {
 			return products;
 		}
-		public List<Integer> getQuantity() {
+		public ArrayList<Integer> getQuantity() {
 			return quantity;
 		}
 		
@@ -76,6 +76,24 @@ public class CartModel {
 		public int returnquantityByIndex(int index) {
 			return(quantity.get(index));
 		}
+		public int totProdotti() {
+			int tot=0;
+			for(mangaBean prod : products) {
+				
+			tot++;
+			}
+				
+			return tot;
+		}
+		public boolean prodottoExist(int id) {
+			
+			for(mangaBean prod : products) {
+			if(id==prod.getId())	
+				return true;
+			}
+				
+			return false;
+		}
 		
 		
 		
@@ -83,15 +101,41 @@ public class CartModel {
 			
 			double totale = 0.0;
 			
+			
 			for(int i=0; i<products.size(); i++) {
+				mangaBean manga = products.get(i);
 				
-				totale += products.get(i).getPrezzo() * quantity.get(i);
+				double prezzo = manga.getPrezzo();
+				double iva = manga.getIva();
+				
+				
+				totale += prezzo + ((prezzo*iva)/100)* quantity.get(i);
 				
 			}
 			
 			return totale;
 			
 		}
+		public static double calcolaIvaTotale() {
+			
+			double ivatotale = 0.0;
+			
+			
+			for(int i=0; i<products.size(); i++) {
+				mangaBean manga = products.get(i);
+				
+				double prezzo = manga.getPrezzo();
+				double iva = manga.getIva();
+				
+				
+				ivatotale += ((prezzo*iva)/100)* quantity.get(i);
+				
+			}
+			
+			return ivatotale;
+			
+		}
+
 		
 		
 		

@@ -1,6 +1,7 @@
 package control;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
@@ -10,8 +11,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import bean.userBean;
+import Bean.UserBean;
+import model.AddressModel;
 import model.OrderModel;
+import model.PagamentoModel;
+import model.userDAO;
 
 /**
  * Servlet implementation class profiloControl
@@ -20,6 +24,8 @@ import model.OrderModel;
 public class profiloControl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final OrderModel od = new OrderModel();
+	private static final PagamentoModel pagamento = new PagamentoModel();
+	private static final AddressModel modelAd = new AddressModel();
 	;
        
     /**
@@ -27,13 +33,16 @@ public class profiloControl extends HttpServlet {
      */
     public profiloControl() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		userBean user = (userBean) request.getSession().getAttribute("user");
+		// TODO Auto-generated method stub
+			
+		UserBean user = (UserBean) request.getSession().getAttribute("user");
 		
 		String action =(String)request.getParameter("action");
 		System.out.println("azione=="+action);
@@ -42,8 +51,11 @@ public class profiloControl extends HttpServlet {
 			{
 				try {
 					request.setAttribute("order",od.AllUserOrder(user.getId()));
+					request.setAttribute("payment",pagamento.mostraMetodo(user.getId()));
+					request.setAttribute("address",modelAd.addressCatalogByID(String.valueOf(user.getId()) ));
 					System.out.println("ordini utente scelto reperiti");
 				} catch (SQLException e) {
+					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				
@@ -56,7 +68,7 @@ public class profiloControl extends HttpServlet {
 			
 		}else {
 			
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/MangaView.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/manga");
 			dispatcher.forward(request, response);
 		}
 			
@@ -67,6 +79,7 @@ public class profiloControl extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

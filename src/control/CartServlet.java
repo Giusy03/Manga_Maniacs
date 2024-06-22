@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import bean.mangaBean;
+import Bean.mangaBean;
 
 
 @WebServlet("/CartServlet")
@@ -44,13 +44,26 @@ public class CartServlet extends HttpServlet {
 			System.out.println(action);
 			if(action.equalsIgnoreCase("add")) {
 				String ids = request.getParameter("id");
+				
 				System.out.println("Id prodotto: " + ids);
 				int id = Integer.parseInt(ids);
-				try {
-					cart.addProduct(product.selectManga(id));
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
+				
+				
+				
+							
+							try {
+								cart.addProduct(product.selectManga(id));
+							} catch (SQLException e) {
+								e.printStackTrace();
+							}
+						
+						
+					
+						
+					
+				
+
+				
 				System.out.println("Aggiunta del prodotto nel carello "+cart.getProducts());
 				redirect = "/" + request.getParameter("redirect");
 				
@@ -74,6 +87,8 @@ public class CartServlet extends HttpServlet {
 				for(int i = 0; i < cart.size(); i++) {
 					mangaBean mangaN = cart.returnproductByIndex(i);
 					if(mangaN.getId() == Integer.parseInt(request.getParameter("id"))) {
+
+						if(mangaN.getQuantita()>cart.returnquantityByIndex(i)) 
 						cart.setquantity(cart.returnquantityByIndex(i) + 1, i);
 					
 						redirect = "/" + request.getParameter("redirect");
@@ -99,10 +114,13 @@ public class CartServlet extends HttpServlet {
 			
 		}
 		request.getSession().setAttribute("cart", cart);
+		if(redirect!=null) {
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(redirect);
 		dispatcher.forward(request, response);
-		System.out.println(cart.getProducts());
-			}
+		}
+		}
+	
+			
 			
 	}
 

@@ -4,31 +4,32 @@
 	<link rel="stylesheet" type="text/css" href="style/login.css">
 </head>
 <body>
+	<a href="manga" style="text-decoration:none;" > <h2 class="logo">MangaManiacs</h2></a>
  	<div class="login-wrap">
 		<div class="login-html">
-			<input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
-			<input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
+			<input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Accedi</label>
+			<input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Registrati</label>
 			<div class="login-form">
 				<div class="sign-in-htm">
 					<form action="login" method="post">
 						<div class="group">
 							<label for="username_in" class="label"><b>username</b></label>
-						<input id="username_in" type ="text" name="username" placeholder = "enter login " class="input"> <br>
+						<input id="username_in" type ="text" name="username" placeholder = "inserisci qui l'username" class="input"> <br>
 						</div>
 						<div class="group">
 							<label for="password_in" class="label"><b>password</b></label>
-							<input class="input" id="password_in" type ="password" name="password" placeholder = "password "> <br>
+							<input class="input" id="password_in" type ="password" name="password" placeholder = "inserisci qui la password"> <br>
 						</div>
 						<div class="group">
 							<input id="check" type="checkbox" class="check" checked>
-							<label for="check"><span class="icon"></span> Keep me Signed in</label>
+							<label for="check"><span class="icon"></span> Conserva L'accesso</label>
 						</div>
 						<div class="group">
-							<input type="submit" class="button" value="Sign In">
+							<input type="submit" class="button" value="Accedi">
 						</div>
 						<div class="hr"></div>
 						<div class="foot-lnk">
-							<a href="#forgot">Forgot Password?</a>
+							<a href="#forgot">Password Dimenticata?</a>
 						</div>
 					</form>
 				</div>
@@ -36,31 +37,31 @@
 				<form action="registration" method="post" onsubmit="event.preventDefault(); validate(this)" >
 							<div class="group">
 								<label for="username_up" class="label"><b>username</b></label>
-						<input id="username_up" type ="text" name="username" placeholder = "enter login " class="input"> <br>
+						<input id="username_up" type ="text" name="username" placeholder = "inserisci qui l'username" class="input"> <br>
 						<div class="inv_feedback" id="erroreUsername">Nome utente non valido</div>
 						
 						</div>
 						<div class="group">
 							<label for="password_up" class="label"><b>password</b></label>
-							<input class="input" id="password_up" type ="password" name="password" placeholder = "password "> <br>
-							<div class="inv_feedback" id="errorePsw">invalid Password</div>
+							<input class="input" id="password_up" type ="password" name="password" placeholder = "inserisci qui la password"> <br>
+							<div class="inv_feedback" id="errorePsw">Password errata</div>
 						</div>
 							<div class="group">
-								<label for="username_up_conferm" class="label">Repeat Password</label>
-								<input id="username_up_conferm" type="password" class="input" data-type="password">
+								<label for="username_up_conferm" class="label">Ripeti Password</label>
+								<input id="username_up_conferm" type="password" class="input" data-type="password" placeholder = "ripeti la password">
 								<div class="inv_feedback" id="errorPswCon">La password non combacia </div>
 							</div>
 							<div class="group">
-								<label for="email_up" class="label">Email Address</label>
-								<input id="email_up" type="text" class="input">
-								<div class="inv_feedback" id="erroreEmail">Email non valido</div>
+								<label for="email_up" class="label">Indirizzo Email</label>
+								<input id="email_up" type="text" class="input" placeholder = "mangamaniacs@mangamaniacs.it">
+								<div class="inv_feedback" id="erroreEmail">Email non valida</div>
 							</div>
 							<div class="group">
-								<input id="button_submit" type="submit" class="button" value="Sign Up">
+								<input id="button_submit" type="submit" class="button" value="Registrati">
 							</div>
 							<div class="hr"></div>
 							<div class="foot-lnk">
-								<label for="tab-1"><a>Already Member?</a></label>
+								<label for="tab-1">Già membro?</a>
 							
 							</div>
 					</form>

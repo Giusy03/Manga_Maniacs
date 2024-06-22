@@ -30,6 +30,19 @@ $("#btnIMO").click(function(){
 
 });
 
+$("#btnP").click(function(){
+	 
+    $(".page").removeClass("visibile");
+    $("#conP").addClass("visibile");
+    
+});
+$("#btnAddr").click(function(){
+	 
+    $(".page").removeClass("visibile");
+    $("#conAddres").addClass("visibile");
+
+
+});
 
 
 

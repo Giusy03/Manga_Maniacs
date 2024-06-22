@@ -1,4 +1,4 @@
-<%@ page language="java" pageEncoding="ISO-8859-1" import="java.util.*,bean.mangaBean,bean.genereBean"%>
+<%@ page language="java" pageEncoding="ISO-8859-1" import="java.util.*,Bean.mangaBean,Bean.genereBean"%>
      <%
 	Collection<?> products = (Collection<?>) request.getAttribute("products");
 	if(products == null) {
