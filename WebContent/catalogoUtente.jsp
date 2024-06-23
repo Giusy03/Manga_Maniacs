@@ -12,20 +12,20 @@
 <head>
 <link rel="icon" href="./img/favicon.png" type="image/png">
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Catalogo</title>
 </head>
 <body>
 	<table border="1">
 			<tr>
 				<th>Immagine </th>
-				<th>Titolo <a href="manga?sort=nomeProdotto">Sort</a></th>
-				<th>Prezzo <a href="manga?sort=prezzo">Sort</a></th>
-				<th>Editore <a href="manga?sort=editore">Sort</a></th>
-				<th>Autore <a href="manga?sort=autore">Sort</a></th>
-				<th>Iva <a href="manga?sort=ivaprodotto">Sort</a></th>
+				<th>Titolo <a href="manga?sort=nomeProdotto">Ordina</a></th>
+				<th>Prezzo <a href="manga?sort=prezzo">Ordina</a></th>
+				<th>Editore <a href="manga?sort=editore">Ordina</a></th>
+				<th>Autore <a href="manga?sort=autore">Ordina</a></th>
+				<th>Iva <a href="manga?sort=ivaprodotto">Ordina</a></th>
 				
-				<th>Description <a href="manga?sort=descrizione">Sort</a></th>
-				<th>Quantita <a href="manga?sort= quantita">Sort</a></th>
+				<th>Description <a href="manga?sort=descrizione">Ordina</a></th>
+				<th>Quantita <a href="manga?sort= quantita">Ordina</a></th>
 				<th>Generi </th>
 				
 				<th></th>
@@ -60,7 +60,7 @@
 				}
 			} else {
 		%>
-		     nessun genere
+		     Nessun Genere
 		<%
 				
 			} 
@@ -75,7 +75,7 @@
 			} else {
 		%>
 		<tr>
-			<td colspan="6">No products available</td>
+			<td colspan="6">Nessun prodotto disponibile</td>
 		</tr>
 		<%
 			}

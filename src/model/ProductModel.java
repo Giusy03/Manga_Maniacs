@@ -23,7 +23,7 @@ public class ProductModel  {
 	    PreparedStatement statement = null;
 	    Collection<mangaBean> beans = new LinkedList<mangaBean>();
 
-	    StringBuilder selectSQL = new StringBuilder("SELECT manga.id, manga.titolo, collocamento.id_deposito, deposito.nome AS deposito_nome, "
+	    StringBuilder selectSQL = new StringBuilder("SELECT manga.id, manga.titolo, manga.prezzo, manga.editore, manga.autore, manga.iva, manga.descrizione, manga.img, manga.inv, manga.data, manga.lingua, collocamento.id_deposito, deposito.nome AS deposito_nome, "
 	            + "appartiene.id_genere, genere.nome AS genere_nome, SUM(collocamento.disponibilita) AS quantita "
 	            + "FROM " + ProductModel.TABLE_NAME
 	            + " INNER JOIN mangamaniacs.collocamento ON manga.id = collocamento.id_manga "
@@ -122,7 +122,7 @@ public class ProductModel  {
 	        while (rs.next()) {
 	            mangaBean manga = new mangaBean();
 	            manga.setId(rs.getInt("id"));
-	            manga.setTitolo(rs.getString("nome"));
+	            manga.setTitolo(rs.getString("Titolo"));
 	            manga.setPrezzo(rs.getDouble("prezzo"));
 	            manga.setEditore(rs.getString("editore"));
 	            manga.setAutore(rs.getString("autore"));
@@ -133,6 +133,7 @@ public class ProductModel  {
 	            manga.setQuantita(rs.getInt("quantita"));
 	            manga.setDataProdotto(rs.getString("data"));
 	            manga.setLingua(rs.getString("lingua"));
+
 	            beans.add(manga);
 	        }
 	    } finally {
@@ -501,7 +502,7 @@ public class ProductModel  {
 		PreparedStatement statement = null;
 		
 		String insertSQL = "INSERT INTO " + ProductModel.TABLE_NAME
-				+ " ( Titolo,prezzo ,editore,autore,iva,descrizione,data,lingua) VALUES ( ?, ?, ?, ?, ?,?,?,?)";
+				+ " (Titolo,prezzo,editore,autore,iva,descrizione,data,lingua) VALUES ( ?, ?, ?, ?, ?,?,?,?)";
 		try {
 			
 			connessione = DriverManagerConnectionPool.getConnection();

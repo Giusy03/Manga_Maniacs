@@ -67,7 +67,7 @@ private static final String TABLE_NAME_CONTEINER = "appartiene";
 			+"	 on manga.id=appartiene.id_manga "
 			+"	join  mangamaniacs.genere "
 				+" on genere.id=appartiene.id_genere"
-				+" where    manga.id='"+id+"'";
+				+" where manga.id='"+id+"'";
 		
 		
 		
@@ -86,6 +86,7 @@ private static final String TABLE_NAME_CONTEINER = "appartiene";
 				genere.setId(rs.getInt("id_genere"));
 				genere.setId_prodotto(rs.getInt("id_manga"));
 				genere.setNome((String)rs.getString("nome"));
+			
 				
 				
 				
@@ -111,7 +112,7 @@ private static final String TABLE_NAME_CONTEINER = "appartiene";
 		String deletSQL =  "DELETE FROM " + genereModel.TABLE_NAME_CONTEINER + " WHERE id_genere = ?  && id_manga= ? ";
 				
 		try {
-			//System.out.println(deletSQL);
+			System.out.println(deletSQL);
 			connessione = DriverManagerConnectionPool.getConnection();
 			statement = connessione.prepareStatement(deletSQL);
 			
@@ -120,10 +121,10 @@ private static final String TABLE_NAME_CONTEINER = "appartiene";
 			statement.setInt(2,genere.getId_prodotto());
 			
 		
-			//System.out.println((String)statement.toString());
+			System.out.println((String)statement.toString());
 
 			result=statement.executeUpdate();
-	//System.out.println("risultalto "+result);
+	System.out.println("risultalto "+result);
 			connessione.commit();
 		
 	}finally {
@@ -146,7 +147,7 @@ public synchronized boolean deletAllById(int id)  throws SQLException {
 		String deletSQL =  "DELETE FROM " + genereModel.TABLE_NAME_CONTEINER + " WHERE  id_manga= ? ";
 				
 		try {
-			//System.out.println(deletSQL);
+			System.out.println(deletSQL);
 			connessione = DriverManagerConnectionPool.getConnection();
 			statement = connessione.prepareStatement(deletSQL);
 			
@@ -155,10 +156,10 @@ public synchronized boolean deletAllById(int id)  throws SQLException {
 			statement.setInt(1,id);
 			
 		
-			//System.out.println((String)statement.toString());
+			System.out.println((String)statement.toString());
 
 			result=statement.executeUpdate();
-	//System.out.println("risultalto "+result);
+	System.out.println("risultalto "+result);
 			connessione.commit();
 		
 	}finally {
@@ -183,7 +184,7 @@ public synchronized boolean deletAllById(int id)  throws SQLException {
 				+ " (id_genere,id_manga) VALUES ( ?, ?)";
 				
 		try {
-			//System.out.println(deletSQL);
+			System.out.println(deletSQL);
 			connessione = DriverManagerConnectionPool.getConnection();
 			statement = connessione.prepareStatement(deletSQL);
 			
@@ -192,10 +193,10 @@ public synchronized boolean deletAllById(int id)  throws SQLException {
 			statement.setInt(2,genere.getId_prodotto());
 			
 		
-			//System.out.println((String)statement.toString());
+			System.out.println((String)statement.toString());
 
 			result=statement.executeUpdate();
-	//System.out.println("risultalto "+result);
+	System.out.println("risultalto "+result);
 			connessione.commit();
 		
 	}finally {
@@ -253,12 +254,12 @@ public synchronized boolean doDelete(int id)  throws SQLException {
 	String deletSQL =  "DELETE FROM " + genereModel.TABLE_NAME + " WHERE id = ?";
 			
 	try {
-		//System.out.println(deletSQL);
+		System.out.println(deletSQL);
 		connessione = DriverManagerConnectionPool.getConnection();
 		statement = connessione.prepareStatement(deletSQL);
 		statement.setInt(1,id);
 	
-		//System.out.println((String)statement.toString());
+		System.out.println((String)statement.toString());
 
 		result=statement.executeUpdate();
 		connessione.commit();
