@@ -2,7 +2,6 @@
 			
 		
 <html><head>
-
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="style/HeaderStyle.css">
 
@@ -45,7 +44,7 @@ cart=(CartModel) request.getSession().getAttribute("cart");
 <nav class="navbar navbar-expand-sm">
   <div class="container-fluid">
   <div class="col">
-    <a href="manga" style="text-decoration:none;" > <h2 class="logo">MangaManiacs</h2></a> 
+    <a href="manga" style="text-decoration:none;" > <img src="./img/Logo.png" alt="MangaManiacs" class="logo" style="width: 100px; height: auto;"></a> 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon">Ric</span>
     </button>

@@ -10,6 +10,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+ <link rel="icon" href="./img/favicon.png" type="image/png">
  <style>
     body{
     padding-top:60px;

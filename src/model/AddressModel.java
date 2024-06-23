@@ -10,9 +10,6 @@ import java.util.Collection;
 import java.util.LinkedList;
 
 import Bean.addressBean;
-
-
-import model.DriverManagerConnectionPool;
 public class AddressModel {
 	public Collection<addressBean> addressCatalog() throws SQLException{
 		Connection connessione = null;

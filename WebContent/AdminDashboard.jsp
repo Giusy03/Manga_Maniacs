@@ -10,6 +10,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="icon" href="./img/favicon.png" type="image/png">
 <link rel="icon" type="image/png"
 	href="<%=request.getContextPath()%>/img/Logo.png">
 <style>

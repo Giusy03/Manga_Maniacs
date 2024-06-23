@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="icon" href="./img/favicon.png" type="image/png">
 <meta charset="ISO-8859-1">
 <link rel="stylesheet" type="text/css" href="style/NavStyle.css">
 <title>Insert title here</title>

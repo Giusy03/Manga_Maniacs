@@ -138,7 +138,7 @@ CREATE TABLE `genere` (
   `descrizione` longtext,
   PRIMARY KEY (`id`),
   UNIQUE KEY `nome_UNIQUE` (`nome`)
-) ENGINE=InnoDB AUTO_INCREMENT=97 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -147,7 +147,7 @@ CREATE TABLE `genere` (
 
 LOCK TABLES `genere` WRITE;
 /*!40000 ALTER TABLE `genere` DISABLE KEYS */;
-INSERT INTO `genere` VALUES (5,'ECCHI','Fra la vasta produzione dei fumetti giapponesi è in costante crescita e diffusione quella relativa ai manga ecchi, una parola composta dell\'alfabeto del Paese del Sol Levante che, sostanzialmente, individua tutte quelle opere in cui sono rappresentati dei contenuti erotici o spinti ma che mai arrivano a toccare soglie di nudità o volgarità troppo spinte'),(6,'HORROR','Il genere horror giapponese è molto famoso nella letteratura classica e nei film, dove ci ha regalato perle importanti per gli appassionati come la saga di The Ring, Uzumaki o Jijatsu Sakuru. A rendere particolarmente confacente la cultura giapponese con questo genere è sicuramente la presenza, nella mitologia e nella cultura nipponica, di figure e di entità che si prestano bene ad essere interpretate come orrorifiche e spaventose, grazie ai racconti e alle leggende che aleggiano intorno alle stesse.'),(7,'ISEKAI','Sono ormai diffuse in tutto l\'Occidente le light novel, ovvero dei romanzi a cui vengono in seguito aggiunte delle illustrazioni per renderli dei veri e propri fumetti. Non tutti sanno, però, che esiste un sottogenere di questa categoria che dà vita ai cosiddetti manga isekai. Dalla traduzione letterale dell\'ideogramma giapponese - ovvero mondo differente - il genere isekai prevede che il protagonista dell\'opera si risvegli di punto in bianco, spesso dimenticandosi del suo passato o ricordandolo interamente o in parte, in un mondo nuovo, fantasy, distopico o reale, a seguito di un\'evocazione da parte di forze sovrannaturali o a seguito di una reincarnazione.'),(8,'SHOJO','Se stai pensando a romantiche e commoventi scene sotto una pioggia di petali di ciliegio, con molta probabilità potrai trovarle in un manga shojo. Il termine \"shojo\" significa \"ragazza\" e più che indicare un genere specifico si riferisce al destinatario più comune a cui sono indirizzati i contenuti. In questa tipologia di manga troviamo generalmente tematiche sentimentali, con protagonisti idealizzati e avvolti in un\'aria quasi magica. I personaggi principali sono perlopiù ragazze o ragazzi dalla personalità e dai tratti idealizzati, quasi surreali.'),(9,'MECHA','Se siete fan di tutto ciò che si trova al confine tra tecnologico e fantascientifico i manga mecha sono perfetti per voi. Amanti di universi tecnologicamente strabilianti unitevi! Tutto quello che state cercando è proprio tra le pagine di questi manga.'),(10,'JOSEI ','hojo ma più “adulto”'),(11,'ROMANTIC COMEDY','in parole povere le commedie romantiche si basano sull’elemento romantico e condiscono il tutto con triangoli amorosi, equivoci e molte gag comiche che hanno fatto la storia. Insomma, niente di particolarmente innovativo, se non il fatto che siano dannatamente coinvolgenti!'),(12,'DRAMMATICO ',NULL),(13,' PSICOLOGICO ',NULL),(14,'STORICO ',NULL),(15,'FANTASCIENZA ',NULL),(16,'SOPRANNATURALE ',NULL),(17,'FANTASY ',NULL),(18,'AZIONE ',NULL),(19,'MISTERO',NULL);
+INSERT INTO `genere` VALUES (5,'ECCHI','Fra la vasta produzione dei fumetti giapponesi è in costante crescita e diffusione quella relativa ai manga ecchi, una parola composta dell\'alfabeto del Paese del Sol Levante che, sostanzialmente, individua tutte quelle opere in cui sono rappresentati dei contenuti erotici o spinti ma che mai arrivano a toccare soglie di nudità o volgarità troppo spinte'),(6,'HORROR','Il genere horror giapponese è molto famoso nella letteratura classica e nei film, dove ci ha regalato perle importanti per gli appassionati come la saga di The Ring, Uzumaki o Jijatsu Sakuru. A rendere particolarmente confacente la cultura giapponese con questo genere è sicuramente la presenza, nella mitologia e nella cultura nipponica, di figure e di entità che si prestano bene ad essere interpretate come orrorifiche e spaventose, grazie ai racconti e alle leggende che aleggiano intorno alle stesse.'),(7,'ISEKAI','Sono ormai diffuse in tutto l\'Occidente le light novel, ovvero dei romanzi a cui vengono in seguito aggiunte delle illustrazioni per renderli dei veri e propri fumetti. Non tutti sanno, però, che esiste un sottogenere di questa categoria che dà vita ai cosiddetti manga isekai. Dalla traduzione letterale dell\'ideogramma giapponese - ovvero mondo differente - il genere isekai prevede che il protagonista dell\'opera si risvegli di punto in bianco, spesso dimenticandosi del suo passato o ricordandolo interamente o in parte, in un mondo nuovo, fantasy, distopico o reale, a seguito di un\'evocazione da parte di forze sovrannaturali o a seguito di una reincarnazione.'),(8,'SHOJO','Se stai pensando a romantiche e commoventi scene sotto una pioggia di petali di ciliegio, con molta probabilità potrai trovarle in un manga shojo. Il termine \"shojo\" significa \"ragazza\" e più che indicare un genere specifico si riferisce al destinatario più comune a cui sono indirizzati i contenuti. In questa tipologia di manga troviamo generalmente tematiche sentimentali, con protagonisti idealizzati e avvolti in un\'aria quasi magica. I personaggi principali sono perlopiù ragazze o ragazzi dalla personalità e dai tratti idealizzati, quasi surreali.'),(9,'MECHA','Se siete fan di tutto ciò che si trova al confine tra tecnologico e fantascientifico i manga mecha sono perfetti per voi. Amanti di universi tecnologicamente strabilianti unitevi! Tutto quello che state cercando è proprio tra le pagine di questi manga.'),(10,'JOSEI ','hojo ma più “adulto”'),(11,'ROMANTIC COMEDY','in parole povere le commedie romantiche si basano sull’elemento romantico e condiscono il tutto con triangoli amorosi, equivoci e molte gag comiche che hanno fatto la storia. Insomma, niente di particolarmente innovativo, se non il fatto che siano dannatamente coinvolgenti!'),(12,'DRAMMATICO ',NULL),(13,' PSICOLOGICO ',NULL),(14,'STORICO ',NULL),(15,'FANTASCIENZA ',NULL),(16,'SOPRANNATURALE ',NULL),(17,'FANTASY ',NULL),(18,'AZIONE ',NULL),(19,'MISTERO',NULL),(97,'COMMEDIA','');
 /*!40000 ALTER TABLE `genere` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -288,7 +288,7 @@ DROP TABLE IF EXISTS `utente`;
 CREATE TABLE `utente` (
   `id` int NOT NULL AUTO_INCREMENT,
   `username` varchar(45) DEFAULT NULL,
-  `psw` varchar(45) DEFAULT NULL,
+  `psw` varchar(64) DEFAULT NULL,
   `email` varchar(45) DEFAULT NULL,
   `data_nascita` varchar(45) DEFAULT NULL,
   `nome` varchar(45) DEFAULT NULL,
@@ -305,7 +305,7 @@ CREATE TABLE `utente` (
 
 LOCK TABLES `utente` WRITE;
 /*!40000 ALTER TABLE `utente` DISABLE KEYS */;
-INSERT INTO `utente` VALUES (1,'toni','1234','a.sirico@gmail.com','24-04-2001','Antonio','Sirico','admin'),(2,'tizio','1111','g.chierchia@gmail.com','10-10-2003','Giusy','Chierchia','admin'),(3,'fede','0011','fede.rica@gmail.com','20-02-2002','Fede','Rica','utente');
+INSERT INTO `utente` VALUES (1,'toni','03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4','a.sirico@gmail.com','24-04-2001','Antonio','Sirico','admin'),(2,'tizio','0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c','g.chierchia@gmail.com','10-10-2003','Giusy','Chierchia','admin'),(3,'fede','3afb0ae26000602d7982ca174df02bcd623f4990ceee88be963eb9ec8642ae37','fede.rica@gmail.com','20-02-2002','Fede','Rica','utente'),(4,'prova','be1f4958496b81b37648b4cfcb84f8d9fc4ace83c52733c291a695804585326a','prova@prova.it',NULL,NULL,NULL,'utente');
 /*!40000 ALTER TABLE `utente` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -318,4 +318,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-06-22 16:10:01
+-- Dump completed on 2024-06-23 15:33:35

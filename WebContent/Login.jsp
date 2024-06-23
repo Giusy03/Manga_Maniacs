@@ -1,10 +1,11 @@
 <head>
+<link rel="icon" href="./img/favicon.png" type="image/png">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<meta charset="ISO-8859-1">
 	<link rel="stylesheet" type="text/css" href="style/login.css">
 </head>
 <body>
-	<a href="manga" style="text-decoration:none;" > <h2 class="logo">MangaManiacs</h2></a>
+	<a href="manga" style="text-decoration:none;" > <img src="./img/Logo.png" alt="MangaManiacs" class="logo" style="width: 100px; height: auto;"></a>
  	<div class="login-wrap">
 		<div class="login-html">
 			<input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Accedi</label>
@@ -53,7 +54,7 @@
 							</div>
 							<div class="group">
 								<label for="email_up" class="label">Indirizzo Email</label>
-								<input id="email_up" type="text" class="input" placeholder = "mangamaniacs@mangamaniacs.it">
+								<input id="email_up" type="text" name="email" class="input" placeholder = "mangamaniacs@mangamaniacs.it">
 								<div class="inv_feedback" id="erroreEmail">Email non valida</div>
 							</div>
 							<div class="group">

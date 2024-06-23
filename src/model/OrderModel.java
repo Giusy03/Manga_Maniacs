@@ -9,11 +9,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collection;
 import java.util.LinkedList;
-import java.util.List;
-
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
@@ -22,10 +19,6 @@ import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import Bean.OrderBean;
 import Bean.UserBean;
 import Bean.mangaBean;
-import Bean.addressBean;
-import Bean.PagamentoBean;
-import model.DriverManagerConnectionPool;
-import model.CartModel;
 import java.time.LocalDate;   
 
 
@@ -38,7 +31,7 @@ public class OrderModel {
 		Connection connessione = null;
 		PreparedStatement statement = null;
 		Collection<OrderBean> ordini = new LinkedList<OrderBean>();
-		Collection<mangaBean> mangas = new LinkedList<mangaBean>();
+		new LinkedList<mangaBean>();
 		
 		String sql = "SELECT * FROM " +TABLE_NAME +" WHERE id_utente = '" + id + "'";
 		
@@ -118,7 +111,7 @@ public class OrderModel {
 		statement.setDouble(2, model.CartModel.calcolaIvaTotale());
 		statement.setDouble(3, model.CartModel.calcolaTotale());
 		
-		SimpleDateFormat dtf = new SimpleDateFormat("yyyy/MM/dd");
+		new SimpleDateFormat("yyyy/MM/dd");
 		LocalDate data_ordine = LocalDate.now();
 		statement.setDate(4, Date.valueOf(data_ordine));
 		statement.setString(5, order.getNumeroCarta());

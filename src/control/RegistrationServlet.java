@@ -35,21 +35,18 @@ public class RegistrationServlet extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		userDAO model = new userDAO();
-		HttpSession session = request.getSession();
-		UserBean utente = new UserBean();
-		String redirect;
-		
+		request.getSession();
+		new UserBean();
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
+		String email= request.getParameter("email");
 		
 		
-		
-		System.out.println(username + password);
 		
 		
 		
 		try {
-			 model.signUp(username, password);
+			 model.signUp(username, password, email);
 			
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block

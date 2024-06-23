@@ -11,6 +11,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="icon" href="./img/favicon.png" type="image/png">
 <link rel ="icon" href="getPicture?id=20" type="image/x-icona">
 <meta charset="ISO-8859-1">
 <title>Admin</title>

@@ -28,7 +28,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+<link rel="icon" href="./img/favicon.png" type="image/png">
 <%@include file="Header.jsp"  %>
 	<%@include file="navbar.jsp"  %>
 
