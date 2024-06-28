@@ -237,17 +237,26 @@ public class OrderModel {
         content.beginText();
         content.setFont(PDType1Font.TIMES_ROMAN, 12);
         content.newLineAtOffset(100, 700);
+        
+
         content.showText("Nome: " + user.getNome() + " " + user.getCognome());
-        content.newLine();
+        content.newLineAtOffset(0, -15); // Sposta verso il basso di 15 unità
+        
+
         content.showText("Data ordine: " + order.getData_ordine());
-        content.newLine();
+        content.newLineAtOffset(0, -15); // Sposta verso il basso di 15 unità
+        
+
         content.showText("Indirizzo: " + order.getIndirizzo());
-        content.newLine();
+        content.newLineAtOffset(0, -15); // Sposta verso il basso di 15 unità
+        
         content.showText("Numero carta: " + maskCreditCard(order.getNumeroCarta()));
-        content.newLine();
+        content.newLineAtOffset(0, -15); // Sposta verso il basso di 15 unità
         content.showText("Totale ordine: " + order.getSomma_tot());
+        
         content.endText();
         content.close();
         return MyPDF;
     }
+
 }

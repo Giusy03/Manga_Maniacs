@@ -45,7 +45,7 @@ public class OrderControl extends HttpServlet {
 		if(user==null) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/Login.jsp");
  			dispatcher.forward(request, response);
-			
+			return;
 		}
 		
 		
@@ -196,7 +196,7 @@ public class OrderControl extends HttpServlet {
 			try {
 				System.out.println("carello ordine finale---------------->>>>"+cart.getProducts().toString());
 				od.doSave(order, cart);
-				request.getSession().setAttribute("cart", null);
+				request.getSession().setAttribute("cart", null); //Svuota carrello
 				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
